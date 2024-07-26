@@ -8,8 +8,68 @@ datasource db {
 }
 
 model User {
-    id    Int     @id @default(autoincrement())
-    email String  @unique
-    name  String?
-    password String
+    id             String      @id @default(uuid())
+    title          String?
+    name           String?
+    surname        String?
+    email          String?     @unique
+    idNumber       String?     @unique
+    mobileNumber   String?     @unique
+    address        String?
+    city           String?
+    zipCode        String?
+    province       String?
+    dob    String?
+    maritalStatus  String?
+    gender         String?
+    ethnicity      String?
+    nationality    String?
+    employeeType   String?
+    ndtEmail       String?     @unique
+    password       String?
+    departmentId   String?
+    departmentName String?
+    role           String?     @default("Employee")
+    position       String?     @default("N/A")
+    startDate      String?
+    officeLocation String?
+    createdAt      DateTime    @default(now())
+    documents      Documents[]
+    otp            OTP[]
+    department     Department? @relation(fields: [departmentId], references: [id])
+}
+
+model OTP {
+    id         String   @id @default(uuid())
+    userID     String
+    code       String
+    createdAt  DateTime @default(now())
+    expiryDate DateTime
+    user       User     @relation(fields: [userID], references: [id], onDelete: Cascade)
+}
+
+model Department {
+    id              String    @id @default(uuid())
+    departmentName String    @unique
+    projects        Project[]
+    users           User[]
+}
+
+model Project {
+    id              String      @id @default(uuid())
+    projectName    String      @unique
+    projectManager String
+    clientName     String
+    description     String
+    departmentID   String?
+    assignedMembers String[]
+    department      Department? @relation(fields: [departmentID], references: [id])
+}
+
+model Documents {
+    id        String   @id @default(uuid())
+    url       String
+    createdAt DateTime @default(now())
+    userID    String
+    user      User     @relation(fields: [userID], references: [id], onDelete: Cascade)
 }

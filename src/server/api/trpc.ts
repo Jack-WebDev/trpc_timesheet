@@ -9,6 +9,7 @@ type JWTPayload = {
   id: string;
   email: string;
   isAdmin: boolean;
+  isManager: boolean;
 };
 
 export const createTRPCContext = async (opts: { headers: Headers }) => {
@@ -62,6 +63,18 @@ export const protectedProcedure = t.procedure.use(async ({ ctx, next }) => {
 export const adminProcedure = publicProcedure.use(async (opts) => {
   const { ctx } = opts;
   if (!ctx.user?.isAdmin) {
+    throw new TRPCError({ code: "UNAUTHORIZED" });
+  }
+  return opts.next({
+    ctx: {
+      user: ctx.user,
+    },
+  });
+});
+
+export const managerProcedure = publicProcedure.use(async (opts) => {
+  const { ctx } = opts;
+  if (!ctx.user?.isManager) {
     throw new TRPCError({ code: "UNAUTHORIZED" });
   }
   return opts.next({

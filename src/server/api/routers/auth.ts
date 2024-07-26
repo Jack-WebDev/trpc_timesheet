@@ -8,7 +8,7 @@ import type { User as PrismaUser } from "@prisma/client";
 import bcryptjs from "bcryptjs";
 import { deleteCookie } from "cookies-next";
 
-export const postRouter = createTRPCRouter({
+export const authRouter = createTRPCRouter({
   register: publicProcedure
     .input(
       z.object({

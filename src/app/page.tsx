@@ -8,14 +8,14 @@ import { deleteCookie, setCookie } from "cookies-next";
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const loginMutation = api.post.login.useMutation({
+  const loginMutation = api.auth.login.useMutation({
     onSuccess: ({ accessToken }) => {
       setCookie("accessToken", accessToken);
       setToken(accessToken);
     },
   });
 
-  const logoutMutation = api.post.logout.useMutation({
+  const logoutMutation = api.auth.logout.useMutation({
     onSuccess: () => {
       deleteCookie("accessToken");}
   });
