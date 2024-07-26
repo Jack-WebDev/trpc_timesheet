@@ -7,7 +7,10 @@ import { db } from "@/server/db";
 
 type JWTPayload = {
   id: string;
-  email: string;
+  ndtEmail: string;
+  role: string;
+  name: string;
+  surname: string;
   isAdmin: boolean;
   isManager: boolean;
 };

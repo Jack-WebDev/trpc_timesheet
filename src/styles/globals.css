@@ -2,68 +2,229 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 10% 3.9%;
-    --radius: 0.5rem;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-  }
-
-  .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-  }
+:root {
+  --primary-color: #dda83a;
+  --secondary-color: #015a4a;
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+.light-mode {
+  background-color: white;
+  color: black;
 }
+
+.dark-mode {
+  background-color: #16151c;
+  color: white;
+}
+
+.link:hover {
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.link.active {
+  color: var(--primary-color);
+  font-weight: 600;
+  border: none;
+  border-left: 3px solid var(--primary-color);
+  background-color: rgba(114, 82, 243, 0.05);
+  padding: 10px 20px;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+.side_menu {
+  grid-template-rows: 0.3fr 1fr;
+}
+
+.logo {
+  position: absolute;
+  top: 1rem;
+  left: 2rem;
+}
+
+.form_img {
+  width: 100%;
+}
+
+.tabs__header {
+  background-color: rgba(221, 167, 58, 0.3);
+  border-radius: 3rem;
+}
+
+.tabs__header .login_tab[data-state="active"],
+.tabs__header .register_tab[data-state="active"] {
+  border: none;
+  background-color: #dda83a;
+  border-radius: 4rem;
+  color: #fff;
+}
+
+.login_btn,
+.register_btn {
+  background-color: #dda83a;
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+}
+
+.form__container {
+  border: 2px solid #dda83a;
+  border-radius: 20px;
+  padding: 4rem;
+  background-color: #fafafa;
+}
+
+input {
+  border-radius: 2rem;
+}
+
+.filter_input {
+  border: 1px solid #000;
+}
+
+.left__column {
+  width: 50%;
+}
+
+.date-range-selector {
+  display: flex;
+  justify-content: center;
+}
+
+.date-range-selector button span::before {
+  border-color: var(--primary-color);
+}
+
+.react-datepicker__month-container
+  .react-datepicker__month
+  .react-datepicker__week
+  .react-datepicker__day--keyboard-selected {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.react-datepicker__month-container
+  .react-datepicker__month
+  .react-datepicker__week
+  .react-datepicker__day--in-range {
+  background-color: var(--secondary-color);
+  color: #fff;
+}
+
+div[role="dialog"] {
+  background-color: white;
+  border-radius: 10px;
+}
+
+select {
+  width: 14vw;
+  border: 1px solid;
+  border-radius: 10px;
+  padding-inline: 10px;
+  height: 120%;
+}
+
+.project_dropdown {
+  width: 13%;
+}
+
+.task_input {
+  width: 15%;
+}
+
+.task_input:focus {
+  border: none;
+  outline: 2px solid var(--primary-color);
+}
+
+.hour_input:focus {
+  border: none;
+  outline: 2px solid var(--primary-color);
+}
+
+.project-card {
+  width: 90%;
+}
+
+.background__image {
+  color: transparent;
+  width: 50%;
+  position: absolute;
+  top: 15%;
+  left: 37%;
+  z-index: -4;
+  filter: opacity(0.2);
+}
+
+.active_tab {
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--primary-color);
+}
+
+.active_side-tab {
+  background-color: var(--primary-color);
+  color: white;
+  width: 100%;
+  /* border-radius: 1rem; */
+}
+
+.active_side-tab:first-child {
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
+}
+
+.active_side-tab:last-child {
+  border-bottom-left-radius: 0.75rem;
+  border-bottom-right-radius: 0.75rem;
+}
+
+.borderStyle:last-child {
+  padding-block-start: 3px;
+}
+
+.borderStyle:not(:last-child) {
+  padding-block-end: 3px;
+}
+
+.custom-class > *[data-ut-element="button"][data-state="uploading"] {
+  background-color: var(--primary-color);
+  color: white;
+  cursor: not-allowed;
+}
+
+/* applied to the upload indicator when uploading */
+.custom-class > *[data-ut-element="button"][data-state="uploading"]::after {
+  background-color: var(--secondary-color);
+}
+
+.custom-radio-input {
+  appearance: none; /* Remove default appearance */
+  width: 18px;
+  height: 18px;
+  border: 2px solid #666; /* Border color */
+  border-radius: 50%; /* Circle shape */
+  position: relative;
+  cursor: pointer;
+}
+
+/* Custom circle inside the radio */
+.custom-radio-input::after {
+  content: '';
+  display: block;
+  width: 10px;
+  height: 10px;
+  background-color: var(--primary-color); /* Circle color */
+  border-radius: 50%; /* Circle shape */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0; /* Hide initially */
+}
+
+/* Show the inner circle when the radio is checked */
+.custom-radio-input:checked::after {
+  opacity: 1;
+}
+
