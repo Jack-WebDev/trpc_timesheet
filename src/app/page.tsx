@@ -1,65 +1,65 @@
-"use client";
+"use client"
 
-import { api } from "@/trpc/react";
-import { useState } from "react";
-import { setToken } from "@/trpc/react";
-import { deleteCookie, setCookie } from "cookies-next";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { LoginForm } from "@/modules/auth/LoginForm";
+import { RegisterForm } from "@/modules/auth/RegisterForm";
 
-export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const loginMutation = api.post.login.useMutation({
-    onSuccess: ({ accessToken }) => {
-      setCookie("accessToken", accessToken);
-      setToken(accessToken);
-    },
-  });
+import Image from "next/image";
 
-  const logoutMutation = api.post.logout.useMutation({
-    onSuccess: () => {
-      deleteCookie("accessToken");}
-  });
+const Home = () => {
+	const isDarkMode = "Light"
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    await loginMutation.mutateAsync({
-      email,
-      password,
-    });
-  };
+	return (
+		<>
+			<div className={`userAuth h-screen flex items-center justify-around ${isDarkMode ? "bg-white" : "bg-white"}`}>
+				<div className="left__column text-center">
+					<Image
+						src={"/6974855_4380.jpg"}
+						alt=""
+						width={500}
+						height={500}
+						className="form_img"
+						style={{ width: "100%", height: "auto" }}
+					/>
+				</div>
+				<Image
+					src={"/ndt-technologies-web-logo.svg"}
+					alt=""
+					width={100}
+					height={100}
+					className="logo"
+				/>
 
-  const handleLogout = async () => {
-    await logoutMutation.mutateAsync();
-  }
+				<div>
+					<div className="intro grid justify-items-center relative bottom-12">
+						<h1 className="text-[2rem] mt-8 text-secondary font-semibold">
+							New Dawn <span className="text-primary">360</span>
+						</h1>
+						<p className="text-secondary font-medium">
+							Your Time, Our Commitment, Streamlined Together.
+						</p>
+					</div>
+					<Tabs defaultValue="login" className="form__container w-[400px]">
+						<TabsList className="tabs__header">
+							<TabsTrigger value="login" className="login_tab">
+								Login
+							</TabsTrigger>
+							<TabsTrigger value="register" className="register_tab">
+								Register
+							</TabsTrigger>
+						</TabsList>
 
-  return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
+						<TabsContent value="login">
+							<LoginForm />
+						</TabsContent>
+						<TabsContent value="register">
+							<RegisterForm />
+						</TabsContent>
+					</Tabs>
+				</div>
+			</div>
+		</>
+	);
+};
 
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-
-        <button type="submit">Login</button>
-      </form>
-        <button onClick={handleLogout}>Log out</button>
-    </div>
-  );
-}
+export default Home;
